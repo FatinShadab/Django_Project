@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} MacroTechBD | Books{% endblock title %}
+
+{% block body %}
+{% load static %}
+<header class="masthead" style="background-image: url('{% static 'assets/img/books.jfif' %}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Free PDF</h1>
+                    <span class="subheading">*** Some of the best books for Bignners. ***</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    {% if object != None %}
+                        {% for obj in object %}
+                            <div class="post-preview">
+                                <a href="{{ obj.file_url }}">
+                                    <h2 class="post-title">{{ obj.name }}</h2>
+                                </a>
+                                <p class="post-meta"> Author - {{ obj.author }}</p>
+                            </div>
+                            <!-- Divider-->
+                            <hr class="my-4" />
+                        {% endfor %} 
+                    {% endif %} 
+<div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="https://www.pdfdrive.com/">More Books →</a></div>               
+</div>
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}MacroTechBD | Projects{% endblock title %}
+
+{% block body %}
+{% load static %}
+<header class="masthead" style="background-image: url('{% static 'assets/img/project.jpg' %}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Projects</h1>
+                    <span class="subheading">*** Our Open Source Projects. Check them out! ***</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    {% if object != None %}
+                        {% for obj in object %}
+                            <div class="post-preview">
+                                <a href="{{ obj.url }}">
+                                    <h2 class="post-title">{{ obj.name }}</h2>
+                                    <h3 class="post-subtitle">{{ obj.short_desc }}</h3>
+                                </a>
+                            </div>
+                            <!-- Divider-->
+                            <hr class="my-4" />
+                        {% endfor %}
+                    {% endif %}
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'projects' %}">Back to Top →</a></div>
+            </div>
+</div>
+{% endblock body %}
