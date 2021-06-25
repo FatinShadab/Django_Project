@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+import django_heroku
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rnfwk##9ah#71%pkf_!!$njcmbv^wgq-@nthst3$97%#x4+v&x'
+SECRET_KEY = 'djangoTurja-insecure-rnfwk##9ah#71%pkf_!!$njcmbv^wgq-@nthst3$97%#x4+v&x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False#True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'macrotechblog.herokuapp.com']
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'embed_video',
     'clean_blogs',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -123,18 +127,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 # Added manually
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Added Manually
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    '/var/www/static/',
+    #'/var/www/static/',
 ]
+
+
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+django_heroku.settings(locals())
