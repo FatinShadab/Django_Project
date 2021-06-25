@@ -1,1 +1,1 @@
-web: gunicorn BLOG/BLOG.wsgi --log-file -
+web: gunicorn BLOG.wsgi --preload --log-file -
